@@ -1,11 +1,59 @@
 <!doctype html>
 <html lang="en">
 
+
+
+<insta-project index="3">
+    <insta-slide top-heading="Reptile" second-heading="Slide 1, Turtle">
+      <p>Turtles are remarkable reptiles that have existed for over 200 million years, making 
+        them one of the oldest living groups on the planet. They are easily identified by their 
+        unique bony or cartilaginous shells, which act as a protective shield against predators. 
+        These resilient creatures inhabit a diverse range of environments, from the vast depths 
+        of the oceans to arid deserts and lush wetlands. While some species are herbivorous, 
+        others enjoy a varied diet of insects, fish, and jellyfish. A fascinating aspect of their 
+        biology is their longevity, as many turtles can live for several decades, with some even 
+        surpassing a century. Despite their hardy nature, many populations are currently threatened 
+        by habitat loss and pollution. Protecting these ancient animals is essential for maintaining 
+        the health of both marine and terrestrial ecosystems.</p>
+    </insta-slide>
+    <insta-slide top-heading="John Cena" second-heading="Slide 1, A guy">
+      <p>John Cena is a professional wrestler, actor, and television presenter known for 
+        his charismatic personality and impressive physique. Born on April 23, 1977, in 
+        West Newbury, Massachusetts, Cena rose to fame in the world of professional 
+        wrestling with WWE (World Wrestling Entertainment). He has won numerous 
+        championships and is celebrated for his catchphrase "You can't see me," 
+        which has become iconic among fans. Beyond wrestling, Cena has successfully 
+        transitioned into acting, starring in various films such as "Trainwreck," 
+        "Bumblebee," and "F9." He is also known for his philanthropic work, particularly 
+        with the Make-A-Wish Foundation, where he holds the record for granting the most 
+        wishes. Cena's versatility and dedication have made him a beloved figure in both 
+        the wrestling and entertainment industries.
+      </p>
+    </insta-slide>
+    <insta-slide top-heading="Italy" second-heading="Slide 1, Florence">
+      <p>Florence is widely celebrated as the birthplace of the Renaissance, 
+        a period where art, science, and philosophy flourished under the patronage 
+        of the powerful Medici family. The citys iconic skyline is dominated by 
+        the magnificent Duomo, featuring Filippo Brunelleschis revolutionary 
+        red-tiled dome that remains an engineering marvel to this day. Walking through 
+        its narrow cobblestone streets, visitors can encounter the Ponte Vecchio, a 
+        medieval stone bridge uniquely lined with historic jewelry shops spanning the 
+        Arno River. As a literal open-air museum, the city houses legendary masterpieces 
+        like Michelangelos David and Botticellis Birth of Venus within its prestigious 
+        galleries. Florence also holds a significant literary legacy, as the local dialect 
+        used by Dante Alighieri eventually became the foundation for the modern Italian 
+        language. Beyond history and art, the city is a haven for food lovers, famous for 
+        its hearty Tuscan cuisine and world-renowned leather craftsmanship. Whether 
+        exploring a hidden courtyard or gazing at a sunset from Piazzale Michelangelo, 
+        the timeless charm of this Tuscan capital leaves an indelible mark on every traveler.</p>
+    </insta-slide>
+</insta-project>
+
 <head>
   <base href="/">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="Description" content="Demonstration for insta-basic-project">
+  <meta name="Description" content="Demonstration for insta-project">
 
   <style>
     :root, html, body {
@@ -15,35 +63,66 @@
     #demo {
       margin: var(--ddd-spacing-2);
     }
-    insta-basic-project {
-      margin: var(--ddd-spacing-2);
+    insta-project {
+      margin: 200px;
+      box-shadow: var(--ddd-boxShadow-sm);
       border: var(--ddd-border-md);
       border-radius: var(--ddd-radius-lg);
     }
-    insta-basic-project:hover {
-      box-shadow: var(--ddd-boxShadow-sm);
+    insta-project:hover {
+      box-shadow: var(--ddd-boxShadow-lg);
     }
     #example {
-      --insta-basic-project-font-size: var(--ddd-font-size-l);
+      --insta-project-font-size: var(--ddd-font-size-l);
       background-color: var(--ddd-accent-2);
       color: var(--ddd-primary-17);
     }
+
+
   </style>
-  <title>insta-basic-project</title>
+  <title>insta-project</title>
 </head>
 
 <body>
   <div id="demo">
-    <h1>insta-basic-project</h1>
-    <!-- this is going to do whatever the tag's defaults are -->
+    <h1>insta-project</h1>
+
     <h2>Default</h2>
-    <insta-basic-project></insta-basic-project>
+    <insta-project>
+      <insta-slide top-heading="Top line heading" second-heading="Slide 1, sub-heading">
+        <p>This is a paragraph talking about slide 1</p>
+      </insta-slide>
+      <insta-slide top-heading="Top line heading" second-heading="Slide 2, sub-heading">
+        <p>This is slide 2</p>
+      </insta-slide>
+      <insta-slide top-heading="Top line heading" second-heading="Slide 3, sub-heading">
+        <p>slide 3</p>
+      </insta-slide>
+    </insta-project>
+
     <h2>Slot usage</h2>
-    <insta-basic-project data-accent="2" data-primary="17"><div>Sample slot content</div></insta-basic-project>
+    <insta-project data-accent="2" data-primary="17">
+      <insta-slide>
+        <p>slide 1</p>
+      </insta-slide>
+      <insta-slide>
+        <p>slide 2</p>
+      </insta-slide>
+    </insta-project>
+
     <h2>Property usage</h2>
-    <insta-basic-project id="example" title="Sample property title"></insta-basic-project>
+    <insta-project id="example" title="Sample property title">
+      <insta-slide>
+        <p>slide 1</p>
+      </insta-slide>
+      <insta-slide>
+        <p>slide 2</p>
+      </insta-slide>
+    </insta-project>
+
   </div>
-  <script type="module" src="./insta-basic-project.js"></script>
+  <script type="module" src="./insta-project.js"></script>
+</body>
 
   <!-- Take HAX, the Web and you further down the rabbit hole -->
   <style>
@@ -86,12 +165,12 @@
     <div class="content">
       <p>
       
-        <strong>Checkout project on github:</strong> <a href="https://github.com/interested-learner/insta-basic-project" target="_blank" rel="nofollow">interested-learner/insta-basic-project</a>
+        <strong>Checkout project on github:</strong> <a href="https://github.com/interested-learner/insta-project" target="_blank" rel="nofollow">interested-learner/insta-project</a>
         
       </p>
       <p>
         You can edit the current page by modifying <code>index.html</code><br />
-        To edit your <strong>insta-basic-project</strong> tag, modify <code>src/insta-basic-project.js</code>.
+        To edit your <strong>insta-project</strong> tag, modify <code>src/insta-project.js</code>.
         This file contains all the HTML, CSS and JavaScript used to render your elements above!
       </p>
       <p>
