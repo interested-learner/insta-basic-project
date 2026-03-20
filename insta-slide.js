@@ -60,17 +60,17 @@ export class PlayListSlide extends DDDSuper(I18NMixin(LitElement)) {
         margin: var(--ddd-spacing-2) 0;
       }
       .content::-webkit-scrollbar {
-  width: 12px;               /* width of the entire scrollbar */
+  width: 12px;              
 }
 
 .content::-webkit-scrollbar-track {
-  background: lightgray;        /* color of the tracking area */
+  background: lightgray; 
 }
 
 .content::-webkit-scrollbar-thumb {
-  background-color: var(--ddd-theme-default-beaverBlue);    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px var(--ddd-theme-default-beaverBlue);  /* creates padding around scroll thumb */
+  background-color: var(--ddd-theme-default-beaverBlue); 
+  border-radius: 20px;       
+  border: 3px var(--ddd-theme-default-beaverBlue); 
 }
     `];
   }

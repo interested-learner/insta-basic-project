@@ -7,7 +7,7 @@ import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
 import "./insta-arrow.js";
 import "./insta-indicator.js";
-import "./insta-slide.js";
+import "./insta-card.js";
 
 /**
  * `insta-project`
@@ -23,20 +23,16 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    this.title = "";
     this.currentIndex = 0;
-    this.t = {
-      title: "",
-    };
-    this.slides = Array.from(this.querySelectorAll("insta-slide"));
+    this.items = [];
   }
 
   // Lit reactive properties
   static get properties() {
     return {
       ...super.properties,
-      title: { type: String },
       currentIndex: { type: Number },
+      items: { type: Array },
     };
   }
 
@@ -46,11 +42,7 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
     css`
       :host {
         display: block;
-        color: var(--ddd-theme-primary);
-        background-color: var(--ddd-theme-default-slateMaxLight);
-        font-family: var(--ddd-font-navigation);
-        width: 850px;
-        height: 410px; 
+        width: 500px;
       }
       .wrapper {
         margin: var(--ddd-spacing-2);
@@ -69,11 +61,14 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
       h3 span {
         font-size: var(--insta-project-label-font-size, var(--ddd-font-size-s));
       }
-
-      
     `];
   }
 
+    async firstUpdated() {
+    const requests = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map(() => fetch("https://randomfox.ca/floof/").then(res => res.json()));
+    this.items = await Promise.all(requests);
+  }
+  
   // Lit render the HTML
   render() {
     return html`
@@ -81,21 +76,21 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
         <div class="row">
           <insta-arrow direction="prev"
             .index="${this.currentIndex}"
-            .total="${this.slides ? this.slides.length : 0}"
+            .total="${this.items ? this.items.length : 0}"
             @prev-clicked="${this.prev}">
           </insta-arrow>
-          <div class="slide-content">
-            <slot></slot>
-          </div>
+        
+          <insta-card></insta-card>
+
           <insta-arrow direction="next"
             .index="${this.currentIndex}"
-            .total="${this.slides ? this.slides.length : 0}"
+            .total="${this.items ? this.items.length : 0}"
             @next-clicked="${this.next}">
           </insta-arrow>
         </div>
         <insta-indicator
           @play-list-index-changed="${this.handleEvent}"
-          .total="${this.slides ? this.slides.length : 0}"
+          .total="${this.items ? this.items.length : 0}"
           .currentIndex="${this.currentIndex}">
         </insta-indicator>
       </div>`;
@@ -103,34 +98,22 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
 
   handleEvent(e) {
     this.currentIndex = e.detail.index;
-    this._updateSlides();
   }
 
 next() {
-  if (this.currentIndex < this.slides.length - 1) {
+  if (this.currentIndex < this.items.length - 1) {
     this.currentIndex++;
-    this._updateSlides();
   }
 }
 
 prev() {
   if (this.currentIndex > 0) {
     this.currentIndex--;
-    this._updateSlides();
   }
 }
 
-firstUpdated() {
-  this._updateSlides();
-}
-
-_updateSlides() {
-  this.slides.forEach((slide, i) => {
-    slide.style.display = i === this.currentIndex ? "block" : "none";
-  });
 
 }
 
-}
 
 globalThis.customElements.define(PlayListProject.tag, PlayListProject);
