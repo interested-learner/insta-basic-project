@@ -64,10 +64,7 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
     `];
   }
 
-    async firstUpdated() {
-    const requests = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15].map(() => fetch("https://randomfox.ca/floof/").then(res => res.json()));
-    this.items = await Promise.all(requests);
-  }
+
   
   // Lit render the HTML
   render() {
