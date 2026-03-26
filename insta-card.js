@@ -126,7 +126,7 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
         return html`
             <div class="card">
                 <div class="card-header">
-                    <img class="user-img" src="https://randomfox.ca/favicon.ico" alt="user profile pic" />
+                    <img class="user-img" src="https://img.favpng.com/8/23/2/earth-drawing-clip-art-cartoon-vector-graphics-png-favpng-2emmkYizLN5iyTUYyedhDtc3C.jpg" alt="user profile pic" />
                     <span class="username">nature_daily</span>
                 </div>
                 
