@@ -23,7 +23,8 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
 
   constructor() {
     super();
-    this.currentIndex = 0;
+    const params = new URLSearchParams(window.location.search);
+    this.currentIndex = params.get("activeIndex") ? parseInt(params.get("activeIndex")) : 0;
     this.items = [];
   }
 
@@ -64,6 +65,17 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
     `];
   }
 
+  async firstUpdated() {
+    const response = await fetch("/api/data");
+    const data = await response.json();
+    this.items = data.images;
+  }
+
+  _updateUrl(index) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("activeIndex", index);
+    history.pushState(null, '', url.toString());
+  }
 
   
   // Lit render the HTML
@@ -77,7 +89,11 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
             @prev-clicked="${this.prev}">
           </insta-arrow>
         
-          <insta-card></insta-card>
+          <insta-card
+          .image="${this.items[this.currentIndex]?.image || ''}"
+          .name="${this.items[this.currentIndex]?.name || ''}"
+          .description="${this.items[this.currentIndex]?.description || ''}">
+        </insta-card>
 
           <insta-arrow direction="next"
             .index="${this.currentIndex}"
@@ -93,22 +109,28 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
       </div>`;
   }
 
-  handleEvent(e) {
-    this.currentIndex = e.detail.index;
-  }
 
 next() {
   if (this.currentIndex < this.items.length - 1) {
     this.currentIndex++;
+    this._updateUrl(this.currentIndex);
   }
 }
 
 prev() {
   if (this.currentIndex > 0) {
     this.currentIndex--;
+    this._updateUrl(this.currentIndex);
   }
 }
 
+handleEvent(e) {
+  this.currentIndex = e.detail.index;
+  this._updateUrl(this.currentIndex);
+}
+
+
+  
 
 }
 

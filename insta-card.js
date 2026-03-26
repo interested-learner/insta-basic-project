@@ -19,6 +19,8 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
         this.liked = false;
         this.likeCount = 0;
         this.loading = true;
+        this.name = "";
+        this.description = "";
     }
 
     static get properties() {
@@ -28,7 +30,8 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
             link: { type: String },
             liked: { type: Boolean },
             likeCount: { type: Number },
-            loading: { type: Boolean },
+            name: { type: String },
+            description: { type: String },
         };
     }
 
@@ -67,7 +70,7 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
                 background: none;
                 border: none;
                 cursor: pointer;
-                font-size: 24px;
+                font-size: 48px;
                 padding: 8px 16px;
             }
             .heart-btn.liked {
@@ -78,6 +81,17 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
                 font-weight: bold;
                 font-size: 14px;
             }
+
+            .card-name {
+                padding: 0 16px 4px;
+                font-weight: bold;
+                font-size: 14px;
+            }
+            .card-description {
+                padding: 0 16px 12px;
+                font-size: 14px;
+                color: #555;
+            }
             
             @media (prefers-color-scheme: dark) {
                 .card {
@@ -86,28 +100,34 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
                 }
                 .like-count {
                     color: white;
-                }
             }
+        }
         `];
-    }
-    async firstUpdated() {
-        const response = await fetch("https://randomfox.ca/floof/");
-        const data = await response.json();
-        this.image = data.image;
-        this.link = data.link;
     }
 
     _toggleLike() {
         this.liked = !this.liked;
         this.likeCount = this.liked ? this.likeCount + 1 : this.likeCount - 1;
+        localStorage.setItem(`liked-${this.name}`, JSON.stringify(this.liked));
+        localStorage.setItem(`likeCount-${this.name}`, JSON.stringify(this.likeCount));
     }
+
+    updated(changedProperties) {
+        if (changedProperties.has("name") && this.name) {
+            const savedLiked = localStorage.getItem(`liked-${this.name}`);
+            const savedCount = localStorage.getItem(`likeCount-${this.name}`);
+            this.liked = savedLiked ? JSON.parse(savedLiked) : false;
+            this.likeCount = savedCount ? JSON.parse(savedCount) : 0;
+        }
+    }
+
 
     render() {
         return html`
             <div class="card">
                 <div class="card-header">
                     <img class="user-img" src="https://randomfox.ca/favicon.ico" alt="user profile pic" />
-                    <span class="username">randomfoxes</span>
+                    <span class="username">nature_daily</span>
                 </div>
                 
                 <div class="card-image">
@@ -117,10 +137,13 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
                 <button
                     class="heart-btn ${this.liked ? 'liked' : ''}"
                     @click="${this._toggleLike}">
-                    ${this.liked ? '\u2665' : '\u2661'}
+                    ${this.liked ? '\u2665' : '\u2665'}
                 </button>
 
                 <div class="like-count">${this.likeCount} likes</div>
+
+                <div class="card-name">${this.name}</div>
+                <div class="card-description">${this.description}</div>
 
             </div>
     `;
