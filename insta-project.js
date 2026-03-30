@@ -26,6 +26,7 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
     const params = new URLSearchParams(window.location.search);
     this.currentIndex = params.get("activeIndex") ? parseInt(params.get("activeIndex")) : 0;
     this.items = [];
+    this.author = {};
   }
 
   // Lit reactive properties
@@ -34,6 +35,7 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
       ...super.properties,
       currentIndex: { type: Number },
       items: { type: Array },
+      author: { type: Object },
     };
   }
 
@@ -43,9 +45,16 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
     css`
       :host {
         display: block;
-        width: 500px;
+        width: 100%;
+        max-width: 550px;
+        margin: 0 auto;
       }
       .wrapper {
+        background: light-dark(white, black);
+        border-radius: 12px;
+        overflow: hidden;
+        padding: 0;
+        border: 1px solid light-dark(lightgray, dimgray);
         margin: var(--ddd-spacing-2);
         padding: var(--ddd-spacing-4);
       }
@@ -53,8 +62,9 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
         display: flex;
         flex-direction: row;
         align-items: center;
-        margin-left: -45px;
-        margin-right: -45px;
+        justify-content: center;
+        gap: 8px;
+        padding: 8px;
       }
       .slide-content {
         flex: 1;
@@ -69,6 +79,7 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
     const response = await fetch("/api/data");
     const data = await response.json();
     this.items = data.images;
+    this.author = data.author;
   }
 
   _updateUrl(index) {
@@ -82,31 +93,38 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
   render() {
     return html`
       <div class="wrapper">
+        <insta-card
+          .image="${this.items[this.currentIndex]?.image || ''}"
+          .name="${this.items[this.currentIndex]?.name || ''}"
+          .description="${this.items[this.currentIndex]?.description || ''}"
+          .authorName="${this.author?.name || ''}"
+          .authorImage="${this.author?.image || ''}"
+          .authorSince="${this.author?.userSince || ''}"
+          .channel="${this.author?.channel || ''}">
+        </insta-card>
+  
         <div class="row">
           <insta-arrow direction="prev"
             .index="${this.currentIndex}"
-            .total="${this.items ? this.items.length : 0}"
+            .total="${this.items.length}"
             @prev-clicked="${this.prev}">
           </insta-arrow>
-        
-          <insta-card
-          .image="${this.items[this.currentIndex]?.image || ''}"
-          .name="${this.items[this.currentIndex]?.name || ''}"
-          .description="${this.items[this.currentIndex]?.description || ''}">
-        </insta-card>
-
+  
+          <insta-indicator
+            .total="${this.items.length}"
+            .currentIndex="${this.currentIndex}"
+            .thumbnails="${this.items.map(item => item.thumbnail)}"
+            @play-list-index-changed="${this.handleEvent}">
+          </insta-indicator>
+  
           <insta-arrow direction="next"
             .index="${this.currentIndex}"
-            .total="${this.items ? this.items.length : 0}"
+            .total="${this.items.length}"
             @next-clicked="${this.next}">
           </insta-arrow>
         </div>
-        <insta-indicator
-          @play-list-index-changed="${this.handleEvent}"
-          .total="${this.items ? this.items.length : 0}"
-          .currentIndex="${this.currentIndex}">
-        </insta-indicator>
-      </div>`;
+      </div>
+    `;
   }
 
 

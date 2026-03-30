@@ -22,6 +22,7 @@ export class PlaylistIndicator extends DDDSuper(I18NMixin(LitElement)) {
     super();
         this.total = 0;
         this.currentIndex = 0;
+        this.thumbnails = [];
   }
 
   static get properties() {
@@ -29,57 +30,70 @@ export class PlaylistIndicator extends DDDSuper(I18NMixin(LitElement)) {
       ...super.properties,
       total: { type: Number },
       currentIndex: { type: Number },
+      thumbnails: { type: Array },
     };
   }
 
   static get styles() {
-    return [super.styles,
-    css`
+    return [super.styles, css`
       :host {
         display: block;
       }
-      .dots {
+      .thumbs {
         display: flex;
-        justify-content: flex-start;
-        gap: var(--ddd-spacing-2);
-        padding: var(--ddd-spacing-2);
-        }
-    .dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background-color: var(--ddd-theme-default-beaverBlue);
-    opacity: 0.4;
-    cursor: pointer;
-    }
-    .dot.active {
-    opacity: 1;
-    }
-        `];
+        justify-content: center;
+        gap: 8px;
+        padding: 8px;
+      }
+      .thumb {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 4px;
+        cursor: pointer;
+        opacity: 0.5;
+      }
+      .thumb.active {
+        opacity: 1;
+        border: 2px solid var(--ddd-theme-default-beaverBlue);
+      }
+    `];
   }
+  
 
   render() {
-    let dots = [];
-    for (let i = 0; i < this.total; i++) {
-      dots.push(html`
-      <span @click="${this._handleDotClick}" data-index="${i}" class="dot ${i === this.currentIndex ? 'active' : ''}"></span>
-        `);
+    let start = Math.max(0, this.currentIndex - 2);
+    let end = start + 5;
+    if (end > this.total) {
+      end = this.total;
+      start = Math.max(0, end - 5);
     }
-    return html`
-      <div class="dots">
-        ${dots}
-      </div>`;
-  }
+    const visible = [];
 
-_handleDotClick(e) {
-  const indexChange = new CustomEvent("play-list-index-changed", {
+    for (let i = start; i < end; i++) {
+      visible.push(html`
+        <img
+          @click="${() => this._handleThumbnailClick(i)}"
+          src="${this.thumbnails[i] || ''}"
+          class="thumb ${i === this.currentIndex ? 'active' : ''}"
+          alt="slide ${i + 1}"
+        />
+      `);
+    }
+
+    return html`
+      <div class="thumbs">
+        ${visible}
+      </div>
+    `;
+}
+
+_handleThumbnailClick(index) {
+  this.dispatchEvent(new CustomEvent("play-list-index-changed", {
     composed: true,
     bubbles: true,
-    detail: {
-      index: parseInt(e.target.dataset.index)
-    },
-  });
-  this.dispatchEvent(indexChange); 
+    detail: { index: index }
+  }));
 }
 
 }

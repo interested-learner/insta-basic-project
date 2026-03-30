@@ -19,7 +19,7 @@ export default function handler(req, res) {
         date: "2024-01-15",
         thumbnail: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=200",
         image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800",
-        description: "A quiet path winding through an ancient forest."
+        description: "A quiet path winding through an ancient forest. A quiet path winding through an ancient forest. A quiet path winding through an ancient forest. A quiet path winding through an ancient forest.A quiet path winding through an ancient forest. A quiet path winding through an ancient forest."
       },
       {
         name: "Ocean Sunset",
