@@ -24,7 +24,7 @@ export class PlayListArrow extends DDDSuper(I18NMixin(LitElement)) {
     super();
     this.index = 0;
     this.total = 0;
-    this.direction = "next"; // or "prev"
+    this.direction = "next";
   }
 
   // Lit reactive properties

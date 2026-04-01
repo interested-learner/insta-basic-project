@@ -76,12 +76,12 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
   }
 
   async firstUpdated() {
-    const response = await fetch("/api/data");
+    const response = await fetch(new URL("images.json", import.meta.url).href);
     const data = await response.json();
     this.items = data.images;
     this.author = data.author;
   }
-
+  
   _updateUrl(index) {
     const url = new URL(window.location.href);
     url.searchParams.set("activeIndex", index);
