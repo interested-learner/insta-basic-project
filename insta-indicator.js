@@ -42,14 +42,14 @@ export class PlaylistIndicator extends DDDSuper(I18NMixin(LitElement)) {
       .thumbs {
         display: flex;
         justify-content: center;
-        gap: 8px;
-        padding: 8px;
+        gap: var(--ddd-spacing-2);
+        padding: var(--ddd-spacing-2);
       }
       .thumb {
-        width: 50px;
-        height: 50px;
+        width: var(--ddd-icon-sm);
+        height: var(--ddd-icon-sm);
         object-fit: cover;
-        border-radius: 4px;
+        border-radius: var(--ddd-radius-xs);
         cursor: pointer;
         opacity: 0.5;
       }

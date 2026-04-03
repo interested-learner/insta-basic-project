@@ -51,10 +51,10 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
       }
       .wrapper {
         background: light-dark(var(--ddd-theme-default-white), black);
-        border-radius: 12px;
+        border-radius: var(--ddd-radius-md);
         overflow: hidden;
         padding: 0;
-        border: 1px solid light-dark(var(--ddd-theme-default-limestoneLight), var(--ddd-theme-default-coalyGray));
+        border: var(--ddd-border-size-xs) solid light-dark(var(--ddd-theme-default-limestoneLight), var(--ddd-theme-default-coalyGray));
         margin: var(--ddd-spacing-2);
         padding: var(--ddd-spacing-4);
       }
@@ -63,8 +63,8 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
         flex-direction: row;
         align-items: center;
         justify-content: center;
-        gap: 8px;
-        padding: 8px;
+        gap: var(--ddd-spacing-2);
+        padding: var(--ddd-spacing-2);
       }
       .slide-content {
         flex: 1;

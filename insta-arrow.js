@@ -53,12 +53,12 @@ export class PlayListArrow extends DDDSuper(I18NMixin(LitElement)) {
       button {
         background-color: white;
         color: var(--ddd-theme-default-beaverBlue);
-        border: 2px solid var(--ddd-theme-default-beaverBlue);
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
+        border: var(--ddd-border-size-sm) solid var(--ddd-theme-default-beaverBlue);
+        border-radius: var(--ddd-radius-circle);
+        width: var(--ddd-icon-sm);
+        height: var(--ddd-icon-sm);
         cursor: pointer;
-        font-size: 18px;
+        font-size: var(--ddd-font-size-3xs);
         display: flex;
         align-items: center;
         justify-content: center;

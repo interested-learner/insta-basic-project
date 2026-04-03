@@ -3,9 +3,6 @@
  * An Instagram-style photo card that loads a fox from an API.
  */
 
-//Needs a share button???
-//Needs to fix FOUC, the loading state
-//Make the dots thumbnails and don't have to show all 15 at the same time.
 import { LitElement, html, css } from "lit";
 import { DDDSuper } from "@haxtheweb/d-d-d/d-d-d.js";
 import { I18NMixin } from "@haxtheweb/i18n-manager/lib/I18NMixin.js";
@@ -65,13 +62,13 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
             .card-header {
                 display: flex;
                 align-items: center;
-                padding: 12px 16px;
-                gap: 10px;
+                padding: var(--ddd-spacing-3) var(--ddd-spacing-4);
+                gap: var(--ddd-spacing-3);
             }
             .user-img {
                 width: 38px;
                 height: 38px;
-                border-radius: 50%;
+                border-radius: var(--ddd-radius-circle);
                 object-fit: cover;
             }
             .card-image img {
@@ -92,8 +89,8 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
                 background: none;
                 border: none;
                 cursor: pointer;
-                font-size: 48px;
-                padding: 8px 16px;
+                font-size: var(--ddd-icon-md);
+                padding: var(--ddd-spacing-2) var(--ddd-spacing-4);
             }
             .heart-btn.liked {
                 color: red;
@@ -101,29 +98,29 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
             .like-count {
                 padding: 0 16px 8px;
                 font-weight: bold;
-                font-size: 14px;
+                font-size: var(--ddd-font-size-4xs);
                 color: light-dark(black,var(--ddd-theme-default-white));
             }
             .share-btn {
                 background: light-dark(black,var(--ddd-theme-default-white));
                 border: none;
                 cursor: pointer;
-                font-size: 16px;
-                padding: 8px 16px;
+                font-size: var(--ddd-font-size-4xs);
+                padding: var(--ddd-spacing-2) var(--ddd-spacing-4);
                 margin-left: 375px;
                 color: light-dark(var(--ddd-theme-default-skyLight), var(--ddd-theme-default-beaverBlue));
                 margin-top: -40px;
             }
             .card-name {
-                padding: 0 16px 4px;
+                padding: var(--ddd-spacing-0) var(--ddd-spacing-4) var(--ddd-spacing-1);
                 font-weight: bold;
-                font-size: 24px;
+                font-size: var(--ddd-font-size-s);
             }
             .card-description {
-                padding: 0 16px 12px;
-                font-size: 20px;
+                padding: var(--ddd-spacing-0) var(--ddd-spacing-4) var(--ddd-spacing-3);
+                font-size: var(--ddd-font-size-xxs);
                 color: light-dark(var(--ddd-theme-default-coalyGray), var(--ddd-theme-default-limestoneGray));
-                height: 48px;
+                height: var(--ddd-spacing-12);
                 overflow-y: auto;
             }
             .card-description::-webkit-scrollbar {
@@ -136,7 +133,7 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
 
            .card-description::-webkit-scrollbar-thumb {
                 background-color: var(--ddd-theme-default-beaverBlue);
-                border-radius: 20px;
+                border-radius: var(--ddd-radius-rounded);
                 border: 3px var(--ddd-theme-default-beaverBlue);
             }
             
