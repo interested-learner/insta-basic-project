@@ -52,7 +52,7 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
       .wrapper {
         background: light-dark(var(--ddd-theme-default-white), black);
         border-radius: var(--ddd-radius-md);
-        overflow: hidden;
+        overflow: visible;
         padding: 0;
         border: var(--ddd-border-size-xs) solid light-dark(var(--ddd-theme-default-limestoneLight), var(--ddd-theme-default-coalyGray));
         margin: var(--ddd-spacing-2);
@@ -65,6 +65,8 @@ export class PlayListProject extends DDDSuper(I18NMixin(LitElement)) {
         justify-content: center;
         gap: var(--ddd-spacing-2);
         padding: var(--ddd-spacing-2);
+        flex-wrap: nowrap;
+        overflow: visible;
       }
       .slide-content {
         flex: 1;
