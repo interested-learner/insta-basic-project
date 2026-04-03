@@ -69,7 +69,7 @@ export class PlayListArrow extends DDDSuper(I18NMixin(LitElement)) {
       button:disabled {
         opacity: 0.3;
         cursor: not-allowed;
-        background-color: white;
+        background-color: var(--ddd-theme-default-white);
       }
     `];
   }

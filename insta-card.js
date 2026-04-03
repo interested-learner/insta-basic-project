@@ -55,7 +55,7 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
                 color-scheme: light dark;
             }
             .card {
-                background: light-dark(white, black);
+                background: light-dark(var(--ddd-theme-default-white), black);
                 //removed border might need to add back here
                 width: 100%;
                 max-width: 470px;
@@ -82,7 +82,7 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
             }
             .card-image {
                 width: 100%;
-                background: light-dark(white, dimgray);
+                background: light-dark(var(--ddd-theme-default-white), var(--ddd-theme-default-coalyGray));
                 min-height: 300px;
                 display: flex;
                 align-items: center;
@@ -102,16 +102,16 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
                 padding: 0 16px 8px;
                 font-weight: bold;
                 font-size: 14px;
-                color: light-dark(black,white);
+                color: light-dark(black,var(--ddd-theme-default-white));
             }
             .share-btn {
-                background: light-dark(black,white);
+                background: light-dark(black,var(--ddd-theme-default-white));
                 border: none;
                 cursor: pointer;
                 font-size: 16px;
                 padding: 8px 16px;
                 margin-left: 375px;
-                color: light-dark(lightblue, var(--ddd-theme-default-beaverBlue));
+                color: light-dark(var(--ddd-theme-default-skyLight), var(--ddd-theme-default-beaverBlue));
                 margin-top: -40px;
             }
             .card-name {
@@ -122,7 +122,7 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
             .card-description {
                 padding: 0 16px 12px;
                 font-size: 20px;
-                color: light-dark(var(--ddd-theme-default-coalyGray), silver);
+                color: light-dark(var(--ddd-theme-default-coalyGray), var(--ddd-theme-default-limestoneGray));
                 height: 48px;
                 overflow-y: auto;
             }
@@ -131,7 +131,7 @@ export class InstaCard extends DDDSuper(I18NMixin(LitElement)) {
             }
 
             .card-description::-webkit-scrollbar-track {
-                background: lightgray;
+                background: var(--ddd-theme-default-limestoneLight);
             }
 
            .card-description::-webkit-scrollbar-thumb {
